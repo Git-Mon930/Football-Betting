@@ -1,0 +1,44 @@
+# Project language
+language: php
+
+# Allows use container-based infrastructure
+sudo: false
+
+# Start mysql service
+services:
+  - mysql
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+php:
+  - 7.2
+
+# Define an environment variable
+env:
+  - SYMFONY_VERSION="4.1.*" DB=mysql
+
+git:
+  depth: 1
+  
+
+before_script:
+  - nvm install 6.10
+  - npm install
+  - echo 'date.timezone = "Europe/Berlin"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - mysql -uroot -e "CREATE USER 'docker'@'%' IDENTIFIED BY 'docker'"
+  - mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'docker'@'%' WITH GRANT OPTION"
+  - mysql -uroot -e "FLUSH PRIVILEGES"
+  - travis_retry composer self-update
+  - travis_retry composer install --dev --no-interaction
+
+script:
+  - ./node_modules/.bin/encore dev
+  - php bin/console doctrine:database:create --env=test --no-interaction
+  - php bin/console doctrine:migrations:migrate --env=test --no-interaction
+  - php bin/phpunit --coverage-clover=clover.xml
+
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
