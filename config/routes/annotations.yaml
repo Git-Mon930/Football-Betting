@@ -1,0 +1,12 @@
+controllers_user:
+    resource: ../../src/User/Communication/Controller
+    type: annotation
+controllers_gamebetting:
+    resource: ../../src/GameBetting/Communication/Controller
+    type: annotation
+controllers_gameextrabetting:
+    resource: ../../src/GameExtraBetting/Communication/Controller
+    type: annotation
+controllers_game_rating:
+    resource: ../../src/GameRating/Communication/Controller
+    type: annotation
