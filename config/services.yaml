@@ -1,0 +1,59 @@
+
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+    App\User\Communication\Controller\:
+        resource: '../src/User/Communication/Controller'
+        tags: ['controller.service_arguments']
+
+    App\GameBetting\Communication\Controller\:
+        resource: '../src/GameBetting/Communication/Controller'
+        tags: ['controller.service_arguments']
+
+    App\GameExtraBetting\Communication\Controller\:
+        resource: '../src/GameExtraBetting/Communication/Controller'
+        tags: ['controller.service_arguments']
+
+    App\GameRating\Communication\Controller\:
+        resource: '../src/GameRating/Communication/Controller'
+        tags: ['controller.service_arguments']
+
+    App\User\Persistence\Entity\:
+        resource: '../src/User/Persistence/Entity'
+        tags: ['doctrine.repository_service']
+
+    App\GameCore\Persistence\Entity\:
+        resource: '../src/GameCore/Persistence/Entity'
+        tags: ['doctrine.repository_service']
+
+    App\GameExtraBetting\Persistence\Entity\:
+        resource: '../src/GameExtraBetting/Persistence/Entity'
+        tags: ['doctrine.repository_service']
+
+    App\GameBetting\Business\GamePoints\Points:
+        arguments:
+            - '@App\GameBetting\Business\GamePoints\Score\NoWin'
+            - '@App\GameBetting\Business\GamePoints\Score\WinExact'
+            - '@App\GameBetting\Business\GamePoints\Score\WinScoreRightDiff'
+            - '@App\GameBetting\Business\GamePoints\Score\WinTeam'
+
+    App\GameBetting\Business\GameExtraPoints\Points:
+        arguments:
+            - '@App\GameBetting\Business\GameExtraPoints\Score\WinFirstType'
+            - '@App\GameBetting\Business\GameExtraPoints\Score\WinSecondType'
+
+
+    App\GameRating\Business\GameRatingFacade:
+        public: true
