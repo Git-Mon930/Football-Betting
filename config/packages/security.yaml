@@ -1,0 +1,31 @@
+security:
+    encoders:
+        App\User\Persistence\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        our_db_provider:
+            entity:
+                class: App\User\Persistence\Entity\User
+                property: username
+                # if you're using multiple entity managers
+                # manager_name: customer
+
+    firewalls:
+        secured_area:
+            pattern: ^/
+            anonymous: true
+            form_login:
+                check_path: login
+                login_path: login
+                default_target_path: game_bet_list
+
+            logout:
+                path: logout
+                target: login
+
+    access_control:
+        - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/gamebet, roles: ROLE_USER }
+        - { path: ^/gamebetextra, roles: ROLE_USER }
+        - { path: ^/savebet, roles: ROLE_USER }
