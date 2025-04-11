@@ -52,6 +52,7 @@ class Points implements PointsInterface
     {
         foreach ($this->collections as $collection) {
             if (!$collection instanceof ScoreInterface) {
+                throw new \RuntimeException('Collection: ' . get_class($collection) . 'is not instanceof ' . ScoreInterface::class);
             }
         }
     }
