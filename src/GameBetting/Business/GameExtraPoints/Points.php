@@ -39,7 +39,6 @@ class Points implements PointsInterface
 
         foreach ($this->collections as $collection) {
             if ($collection->check($extraResult) === true) {
-                $score = $collection->getScore();
                 break;
             }
         }
