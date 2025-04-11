@@ -9,7 +9,6 @@ interface ScoreInterface
     /**
      * @return int
      */
-    public function getScore(): int;
 
     /**
      * @param ExtraResult $result
