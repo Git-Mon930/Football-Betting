@@ -35,7 +35,6 @@ class Points implements PointsInterface
         });
         $this->collections = array_reverse($this->collections);
 
-        $score = 0;
 
         foreach ($this->collections as $collection) {
             if ($collection->check($extraResult) === true) {
