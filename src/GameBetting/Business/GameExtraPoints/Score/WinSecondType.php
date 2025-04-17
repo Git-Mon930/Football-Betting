@@ -22,6 +22,5 @@ class WinSecondType implements ScoreInterface
      */
     public function check(ExtraResult $result): bool
     {
-        return $result->getType() === 2 && $result->getCountryId() === Config::WIN_COUNTRY_ID;
     }
 }
