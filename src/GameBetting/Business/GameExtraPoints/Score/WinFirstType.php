@@ -18,6 +18,5 @@ class WinFirstType implements ScoreInterface
 
     public function check(ExtraResult $result): bool
     {
-        return $result->getType() === 1 && $result->getCountryId() === Config::WIN_COUNTRY_ID;
     }
 }
