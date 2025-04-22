@@ -35,7 +35,6 @@ class UserFutureGames implements UserFutureGamesInterface
             ->getRepository(Game::class)
             ->findFutureGames();
 
-        $gameId2UserBets = $this->getGameId2UserBets($user, $futureGames);
         $gamesInfo = [];
         /** @var Game $game */
         foreach ($futureGames as $game) {
