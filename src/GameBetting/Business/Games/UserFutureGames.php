@@ -70,6 +70,7 @@ class UserFutureGames implements UserFutureGamesInterface
             ->findUserBettingByUserId($user, $futureGames);
 
         /** @var UserBettingEntity[] $gameId2UserBets */
+        $gameId2UserBets = [];
         /** @var UserBettingEntity $userBet */
         foreach ($userBets as $userBet) {
             $gameId2UserBets[$userBet->getGame()->getId()] = $userBet;
