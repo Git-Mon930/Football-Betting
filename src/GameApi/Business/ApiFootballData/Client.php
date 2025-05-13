@@ -9,7 +9,6 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 class Client implements ClientInterface
 {
     private const TEAMS = '/v1/competitions/467/teams';
-    private const GAMES = '/v1/competitions/467/fixtures';
 
     /**
      * @var GuzzleHttpClient
